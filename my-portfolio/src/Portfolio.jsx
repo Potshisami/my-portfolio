@@ -217,7 +217,7 @@ const Portfolio = () => {
       <section id="contact" className="py-32 px-10 text-center relative">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-purple-900/10 blur-[100px] -z-10"></div>
         <h2 className="text-5xl font-black mb-4">Let's Create Together</h2>
-        <p className="text-slate-400 mb-12 max-w-md mx-auto">Looking for a creative front-end intern for Sprobe Inc. Let's talk about design and code.</p>
+        <p className="text-slate-400 mb-12 max-w-md mx-auto">Looking for a creative front-end intern. Let's talk about design and code.</p>
         
         <div className="flex justify-center space-x-8 mb-12">
             <a href="#" className="p-3 rounded-full bg-slate-900 border border-slate-800 hover:border-purple-500 hover:text-purple-400 transition-all"><Github size={24}/></a>
