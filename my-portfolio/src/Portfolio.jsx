@@ -6,6 +6,23 @@ const Portfolio = () => {
   const [filter, setFilter] = useState('All');
   const [selectedVideo, setSelectedVideo] = useState(null);
 
+  const profile = {
+    name: "Vivian",
+    lastName: "Bangcoyo",
+    title: "UI/UX Designer & Front-End Developer",
+    location: "Bukidnon, Philippines",
+    email: "vivianbangcoyo@gmail.com",
+    resumeLink: "https://drive.google.com/file/d/1t7ogBrPV3adn_Oh_DgAeJX1c6JshpeGV/view?usp=sharing", // Replace with your actual Drive/PDF link
+    about: `BSIT student specializing in UI/UX Design, Front-End Development, and Multimedia Arts. 
+            Focused on building accessible, visually-stunning digital experiences. Passionate about blending design and code to create seamless user journeys.`,
+    socials: {
+      github: "https://github.com/Potshisami",
+      mail: "vivianbangcoyo@gmail.com"
+    }
+  };
+
+  const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}`;
+  
   const projects = [
     {
         title: "LegalITies",
@@ -62,10 +79,10 @@ const Portfolio = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="h-screen flex flex-col justify-center px-10 md:px-24 relative overflow-hidden">
+      {/* Hero Section - FIXED MARGINS */}
+      <section className="min-h-screen flex flex-col justify-center px-10 md:px-24 relative overflow-hidden">
         {/* Background Glow */}
-        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-purple-600/20 blur-[120px] rounded-full"></div>
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-purple-600/20 blur-[120px] rounded-full -z-10"></div>
         
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -73,13 +90,16 @@ const Portfolio = () => {
           transition={{ duration: 0.8 }}
           className="relative z-10"
         >
-          <p className="text-purple-400 font-mono mb-4 text-lg tracking-widest">Hi, my name is</p>
+          <p className="text-purple-400 font-mono mb-4 text-lg tracking-widest uppercase">Hi, my name is</p>
           <h1 className="text-6xl md:text-8xl font-black mb-4 tracking-tight">
-            Vivian <span className="text-slate-500 italic">Bangcoyo.</span>
+            {profile.name} <span className="text-slate-500 italic">{profile.lastName}.</span>
           </h1>
           <h2 className="text-3xl md:text-5xl font-bold text-slate-400 mb-8 leading-tight max-w-4xl">
-            I bridge the gap between <span className="text-white underline decoration-purple-500 underline-offset-8">design</span> and <span className="text-white underline decoration-fuchsia-500 underline-offset-8">code</span>.
+            Bridging the gap between <span className="text-white underline decoration-purple-500 underline-offset-8">design</span> and <span className="text-white underline decoration-fuchsia-500 underline-offset-8">code</span>.
           </h2>
+          <p className="max-w-xl text-slate-400 leading-relaxed text-lg mb-10">
+            {profile.about}
+          </p>
           <div className="flex space-x-4">
             <a href="#work" className="px-8 py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-purple-900/20 transform hover:-translate-y-1">
               View My Work
@@ -87,7 +107,7 @@ const Portfolio = () => {
           </div>
         </motion.div>
       </section>
-
+      
       {/* Featured Work / Gallery */}
       <section id="work" className="py-24 px-10 md:px-24 bg-slate-900/30">
         <div className="flex flex-col md:flex-row justify-between items-center mb-16">
@@ -216,16 +236,17 @@ const Portfolio = () => {
       {/* Footer */}
       <section id="contact" className="py-32 px-10 text-center relative">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-purple-900/10 blur-[100px] -z-10"></div>
-        <h2 className="text-5xl font-black mb-4">Let's Create Together</h2>
-        <p className="text-slate-400 mb-12 max-w-md mx-auto">Looking for a creative front-end intern. Let's talk about design and code.</p>
+        <h2 className="text-5xl font-black mb-4 tracking-tighter">Let's Create Together</h2>
+        <p className="text-slate-400 mb-12 max-w-md mx-auto">
+          Looking for a creative front-end intern for Sprobe Inc. Let's talk about design and code.
+        </p>
         
         <div className="flex justify-center space-x-8 mb-12">
-            <a href="#" className="p-3 rounded-full bg-slate-900 border border-slate-800 hover:border-purple-500 hover:text-purple-400 transition-all"><Github size={24}/></a>
-            <a href="#" className="p-3 rounded-full bg-slate-900 border border-slate-800 hover:border-purple-500 hover:text-purple-400 transition-all"><Linkedin size={24}/></a>
-            <a href="mailto:2201103762@student.buksu.edu.ph" className="p-3 rounded-full bg-slate-900 border border-slate-800 hover:border-purple-500 hover:text-purple-400 transition-all"><Mail size={24}/></a>
+            <a href={profile.socials.github} target="_blank" rel="noreferrer" className="p-4 rounded-full bg-slate-900 border border-slate-800 hover:border-purple-500 hover:text-purple-400 transition-all shadow-xl"><Github size={24}/></a>
+            <a href={gmailLink} target="_blank" className="p-4 rounded-full bg-slate-900 border border-slate-800 hover:border-purple-500 hover:text-purple-400 transition-all shadow-xl"><Mail size={24}/></a>
         </div>
 
-        <a href="mailto:2201103762@student.buksu.edu.ph" className="inline-block px-12 py-5 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-black rounded-2xl hover:scale-105 transition-all shadow-xl shadow-purple-900/40 uppercase tracking-widest text-sm">
+        <a href={gmailLink} target="_blank" className="inline-block px-12 py-5 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-black rounded-2xl hover:scale-105 transition-all shadow-xl shadow-purple-900/40 uppercase tracking-widest text-sm">
           Send an Email
         </a>
       </section>
