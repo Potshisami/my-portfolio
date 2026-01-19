@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --color-accent-gradient: linear-gradient(to right, #8b5cf6, #d946ef);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar to match purple theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #7c3aed;
+  border-radius: 10px;
+}
