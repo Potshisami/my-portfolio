@@ -19,19 +19,19 @@ const Portfolio = () => {
     {
         title: "BukSU Good Governance Area 1",
         category: "Video",
-        description: "Visual identity and motion graphics for youth events.",
-        tags: ["After Effects", "Premiere"],
+        description: "This video highlights the commitment of Smart Governance at Bukidnon State University (BukSU), driving institutional excellence, accountability, and innovation through strategic leadership, integrity, and the integration of digital transformation and resilient policies, all within a high-quality, responsive \"Smart BukSU\" framework",
+        tags: ["After Effects", "Davinci Resolve"],
         icon: <Video className="w-5 h-5" />,
         link: "https://drive.google.com/file/d/1cJgQ-UQ0NMOl5kvoAqlv2VxB9Leml0lF/view?usp=drive_link",
         linkType: "modal"
     },
     {
         title: "Kuripot Chronicles",
-        category: "Graphics",
+        category: "UI/UX",
         description: "Multimedia storytelling for digital engagement.",
         tags: ["Photography", "Design"],
         icon: <Palette className="w-5 h-5" />,
-        link: "YOUR_PORTFOLIO_LINK_OR_DRIVE_HERE",
+        link: "https://www.figma.com/design/OFIW2HhNDfjCAOz6ChItoP/Kuripot-Chronicles?node-id=0-1&t=IwZQBwS1n4Haron6-1",
         linkType: "external"
     }
   ];
@@ -141,77 +141,77 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Video Modal Popup */}
-      {/* Video Modal Popup */}
-        <AnimatePresence>
+     {/* Video Modal Popup */}
+      <AnimatePresence>
         {selectedVideo && (
-            <motion.div 
+          <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4 md:p-10"
             onClick={() => setSelectedVideo(null)}
-            >
+          >
             <motion.div 
-                initial={{ scale: 0.95, y: 20 }}
-                animate={{ scale: 1, y: 0 }}
-                className="bg-slate-900 rounded-3xl w-full max-w-4xl relative border border-slate-800 flex flex-col max-h-[90vh] overflow-hidden"
-                onClick={(e) => e.stopPropagation()} 
+              initial={{ scale: 0.95, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              className="bg-slate-900 rounded-3xl w-full max-w-6xl relative border border-slate-800 flex flex-col md:flex-row max-h-[90vh] md:max-h-[80vh] overflow-hidden"
+              onClick={(e) => e.stopPropagation()} 
             >
-                {/* Close Button */}
-                <button 
+              {/* Close Button */}
+              <button 
                 onClick={() => setSelectedVideo(null)}
-                className="absolute top-4 right-4 z-10 text-white/50 hover:text-purple-400 transition-colors p-2 bg-slate-950/50 rounded-full backdrop-blur-md"
-                >
+                className="absolute top-4 right-4 z-20 text-white/50 hover:text-purple-400 transition-colors p-2 bg-slate-950/50 rounded-full backdrop-blur-md"
+              >
                 <X size={24}/>
-                </button>
-                
-                {/* Video Area */}
-                <div className="aspect-video w-full bg-black flex-shrink-0">
-                <iframe 
+              </button>
+              
+              {/* Video Area (Left Side on Desktop) */}
+              <div className="w-full md:w-2/3 bg-black flex items-center justify-center">
+                <div className="aspect-video w-full h-full">
+                  <iframe 
                     src={selectedVideo.replace('/view', '/preview')} 
                     className="w-full h-full" 
                     allow="autoplay"
                     title="Video Preview"
-                ></iframe>
+                  ></iframe>
                 </div>
+              </div>
 
-                {/* Description Portion */}
-                <div className="p-8 overflow-y-auto custom-scrollbar bg-gradient-to-b from-slate-900 to-slate-950">
+              {/* Description Portion (Right Side on Desktop) */}
+              <div className="w-full md:w-1/3 p-8 overflow-y-auto custom-scrollbar bg-gradient-to-b from-slate-900 to-slate-950 border-t md:border-t-0 md:border-l border-slate-800 flex flex-col">
                 <div className="flex items-center gap-3 mb-4">
-                    <span className="px-3 py-1 bg-purple-500/10 border border-purple-500/20 text-purple-400 text-[10px] font-mono uppercase tracking-widest rounded-full">
+                  <span className="px-3 py-1 bg-purple-500/10 border border-purple-500/20 text-purple-400 text-[10px] font-mono uppercase tracking-widest rounded-full">
                     Project Insight
-                    </span>
+                  </span>
                 </div>
                 
                 <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
-                    Project Overview
+                  {projects.find(p => p.link === selectedVideo)?.title}
                 </h3>
                 
-                <p className="text-slate-400 leading-relaxed mb-6">
-                    {/* This finds the description from your projects array based on the video link */}
-                    {projects.find(p => p.link === selectedVideo)?.description || "No description provided for this project."}
+                <p className="text-slate-400 leading-relaxed text-sm mb-8 flex-grow">
+                  {projects.find(p => p.link === selectedVideo)?.description || "No description provided for this project."}
                 </p>
 
-                <div className="grid grid-cols-2 gap-4 border-t border-slate-800 pt-6">
-                    <div>
-                    <h4 className="text-slate-500 text-xs font-mono uppercase tracking-tighter mb-2 font-bold">Role</h4>
+                <div className="space-y-6 border-t border-slate-800 pt-6 mt-auto">
+                  <div>
+                    <h4 className="text-slate-500 text-[10px] font-mono uppercase tracking-widest mb-2 font-bold">Role</h4>
                     <p className="text-slate-300 text-sm">Lead Editor & Motion Designer</p>
-                    </div>
-                    <div>
-                    <h4 className="text-slate-500 text-xs font-mono uppercase tracking-tighter mb-2 font-bold">Tools Used</h4>
+                  </div>
+                  <div>
+                    <h4 className="text-slate-500 text-[10px] font-mono uppercase tracking-widest mb-2 font-bold">Tools Used</h4>
                     <div className="flex flex-wrap gap-2">
-                        {projects.find(p => p.link === selectedVideo)?.tags.map(tag => (
-                        <span key={tag} className="text-purple-300 text-[10px] italic">#{tag}</span>
-                        ))}
+                      {projects.find(p => p.link === selectedVideo)?.tags.map(tag => (
+                        <span key={tag} className="text-purple-300 text-[11px] italic">#{tag}</span>
+                      ))}
                     </div>
-                    </div>
+                  </div>
                 </div>
-                </div>
+              </div>
             </motion.div>
-            </motion.div>
+          </motion.div>
         )}
-        </AnimatePresence>
+      </AnimatePresence>
 
       {/* Footer */}
       <section id="contact" className="py-32 px-10 text-center relative">
