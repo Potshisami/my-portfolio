@@ -596,7 +596,7 @@ const Portfolio = () => {
                       href="#works"
                       className="px-8 py-4 border border-fuchsia-500/40 text-fuchsia-400 font-black text-[10px] uppercase tracking-widest rounded-xl hover:bg-fuchsia-500 hover:text-white transition-all flex items-center justify-center"
                     >
-                      Explore Studio
+                      Explore Works
                     </motion.a>
                     <motion.a 
                       href="#contact"
