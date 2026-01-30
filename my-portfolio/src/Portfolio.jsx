@@ -485,7 +485,7 @@ const Portfolio = () => {
         </div>
       </section>
 
-      <section id="about" className="py-20 md:py-32 bg-slate-950 relative overflow-hidden border-t border-white/5">
+      <section id="about me" className="py-20 md:py-32 bg-slate-950 relative overflow-hidden border-t border-white/5">
           
           {/* --- MOVING OBJECTS LAYER --- */}
           <div className="absolute inset-0 pointer-events-none opacity-30">
