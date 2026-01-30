@@ -427,8 +427,9 @@ const Portfolio = () => {
 
 
         {/*HERO SECTION*/}
+      {/* RESPONSIVE HERO SECTION */}
       <section id="home" className="min-h-screen bg-slate-950 flex flex-col justify-center overflow-hidden relative">
-        {/* Layer 1: Flickering Work Previews */}
+        {/* Layer 1: Background Preview */}
         <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
           <motion.div 
             animate={{ opacity: [0, 0.5, 0] }}
@@ -437,7 +438,7 @@ const Portfolio = () => {
           />
         </div>
 
-        {/* Layer 2: Moving Text */}
+        {/* Layer 2: Moving Text - Font size scales with screen width */}
         <div className="relative z-10 space-y-4">
           <div className="flex whitespace-nowrap overflow-hidden border-y border-white/5 py-4">
             <motion.div 
@@ -463,7 +464,7 @@ const Portfolio = () => {
           </div>
         </div>
         
-        {/* Responsive Footer Info - Matches your 1400px constraint */}
+        {/* Responsive Footer - Max width matches your constraint */}
         <div className="max-w-[1400px] mx-auto w-full mt-12 md:mt-20 px-6 md:px-20 flex flex-col md:flex-row justify-between items-center md:items-end gap-10 z-10">
           <p className="text-slate-500 font-mono text-[9px] uppercase tracking-widest text-center md:text-left">
             Multimedia & UI/UX Designer Portfolio ©2026
@@ -484,136 +485,130 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* ABOUT ME WITH MOVING OBJECTS */}
-      <section id="about" className="py-24 bg-slate-950 relative overflow-hidden">
-        {/* --- MOVING OBJECTS LAYER --- */}
-        <div className="absolute inset-0 pointer-events-none opacity-30">
-          <AnimatePresence>
-            {hoveredRole === 'uiux' && (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.5 }}
-                className="absolute top-1/4 right-1/4 text-purple-500/20"
-              >
-                <Icon icon="logos:figma" className="text-[120px] md:text-[200px]" />
-              </motion.div>
-            )}
-            
-            {hoveredRole === 'video' && (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.5 }}
-                className="absolute bottom-1/4 right-1/3 text-fuchsia-500/20"
-              >
-                <Icon icon="simple-icons:davinciresolve" className="text-[100px] md:text-[180px]" />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <motion.div
-            animate={{ y: [0, -20, 0], x: [0, 20, 0] }}
-            transition={{ duration: 5, repeat: Infinity }}
-            className="absolute top-1/2 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-purple-600/10 rounded-full blur-[80px] md:blur-[120px]"
-          />
-        </div>
-
-        <div className="max-w-[1400px] mx-auto px-6 md:px-20 relative z-10">
-          <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-24">
-            
-            {/* PROFILE IMAGE: Shrinks on mobile */}
-            <motion.div 
-              className="relative shrink-0"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-            >
-              <motion.div 
-                animate={{ rotate: 360 }}
-                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                className="absolute -inset-4 md:-inset-6 border-2 border-dashed border-purple-500/20 rounded-full"
-              />
+      <section id="about" className="py-20 md:py-32 bg-slate-950 relative overflow-hidden border-t border-white/5">
+          
+          {/* --- MOVING OBJECTS LAYER --- */}
+          <div className="absolute inset-0 pointer-events-none opacity-30">
+            <AnimatePresence>
+              {hoveredRole === 'uiux' && (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.5 }}
+                  className="absolute top-1/4 right-1/4 text-purple-500/20"
+                >
+                  <Icon icon="logos:figma" className="text-[100px] md:text-[200px]" />
+                </motion.div>
+              )}
               
-              <div className="relative w-60 h-60 md:w-96 md:h-96 rounded-full p-2 bg-gradient-to-tr from-purple-600 to-fuchsia-500 shadow-2xl">
-                <div className="w-full h-full rounded-full overflow-hidden border-[6px] md:border-[8px] border-slate-950 bg-purple-600">
-                  <img 
-                    src="/images/profile-transparent.png" 
-                    alt="Vivian J. Bangcoyo" 
-                    className="w-full h-full object-cover" 
-                  />
-                </div>
-              </div>
-            </motion.div>
+              {hoveredRole === 'video' && (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.5 }}
+                  className="absolute bottom-1/4 right-1/3 text-fuchsia-500/20"
+                >
+                  <Icon icon="simple-icons:davinciresolve" className="text-[80px] md:text-[180px]" />
+                </motion.div>
+              )}
+            </AnimatePresence>
 
-            {/* CONTENT AREA */}
-            <div className="flex-1 text-center md:text-left">
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+            <motion.div
+              animate={{ y: [0, -20, 0], x: [0, 20, 0] }}
+              transition={{ duration: 5, repeat: Infinity }}
+              className="absolute top-1/2 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-purple-600/10 rounded-full blur-[80px] md:blur-[120px]"
+            />
+          </div>
+
+          {/* MAIN CONTAINER: Consistent px-6 md:px-20 */}
+          <div className="max-w-[1400px] mx-auto px-6 md:px-20 relative z-10">
+            <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24">
+              
+              {/* PROFILE IMAGE: Shrinks responsively */}
+              <motion.div 
+                className="relative shrink-0"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-5xl md:text-8xl font-black italic text-white uppercase mb-6 leading-none tracking-tighter">
-                  THE <span className="text-purple-500">VISIONARY.</span>
-                </h2>
+                <motion.div 
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                  className="absolute -inset-4 md:-inset-6 border-2 border-dashed border-purple-500/20 rounded-full"
+                />
                 
-                <p className="text-slate-400 text-sm md:text-base leading-relaxed mb-10 max-w-xl md:border-l-4 border-purple-500/30 md:pl-6">
-                  I help brands tell their story and solve their problems. As a 4th year BSIT student with a deep passion for <b>UI/UX</b> and <b>Digital Marketing</b>, I bridge the gap between technical logic and visual storytelling.
-                </p>
-
-                {/* ROLES: Stacks on mobile */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-4 lg:gap-8 mb-12 w-full">
-                  {[
-                    { role: 'UI/UX Designer', tech: 'Interfaces // Figma', color: 'bg-purple-500', id: 'uiux' },
-                    { role: 'Video Editor', tech: 'Motion // DaVinci', color: 'bg-fuchsia-500', id: 'video' },
-                    { role: 'Graphic Designer', tech: 'Branding // AI & PS', color: 'bg-blue-500', id: 'graphic' }
-                  ].map((item) => (
-                    <motion.div 
-                      key={item.id}
-                      onMouseEnter={() => setHoveredRole(item.id)}
-                      onMouseLeave={() => setHoveredRole(null)}
-                      className="group min-w-fit"
-                    >
-                      <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
-                        <div className={`w-[3px] h-4 ${item.color} rounded-full group-hover:h-6 transition-all duration-300`} />
-                        <p className="text-white font-black text-lg md:text-xl uppercase italic leading-none whitespace-nowrap group-hover:text-purple-400 transition-colors">
-                          {item.role}
-                        </p>
-                      </div>
-                      <p className="text-[8px] text-slate-500 tracking-[0.2em] font-bold uppercase md:pl-3">
-                        {item.tech}
-                      </p>
-                    </motion.div>
-                  ))}
-                </div>
-                
-                {/* BUTTONS: Stack or wrap on small screens */}
-                <div className="flex flex-wrap justify-center md:justify-start gap-4">
-                  <motion.button 
-                    onClick={() => setIsResumeOpen(true)}
-                    className="flex-1 md:flex-none px-8 py-4 bg-white text-black font-black text-[10px] uppercase tracking-widest rounded-xl hover:bg-purple-600 hover:text-white transition-all shadow-xl"
-                  >
-                    Resume
-                  </motion.button>
-
-                  <motion.a 
-                    href="#works"
-                    className="flex-1 md:flex-none px-8 py-4 border border-fuchsia-500/50 text-fuchsia-400 font-black text-[10px] uppercase tracking-widest rounded-xl hover:bg-fuchsia-500 hover:text-white flex items-center justify-center transition-all duration-300"
-                  >
-                    Works
-                  </motion.a>
-
-                  <motion.a 
-                    href="#contact"
-                    className="flex-1 md:flex-none px-8 py-4 border border-slate-800 text-white font-black text-[10px] uppercase tracking-widest rounded-xl hover:border-purple-500 flex items-center justify-center transition-all"
-                  >
-                    Contact
-                  </motion.a>
+                <div className="relative w-60 h-60 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full p-1.5 bg-gradient-to-tr from-purple-600 to-fuchsia-500 shadow-2xl">
+                  <div className="w-full h-full rounded-full overflow-hidden border-[6px] md:border-[10px] border-slate-950 bg-slate-900">
+                    <img 
+                      src="/images/profile-transparent.png" 
+                      alt="Vivian J. Bangcoyo" 
+                      className="w-full h-full object-cover" 
+                    />
+                  </div>
                 </div>
               </motion.div>
+
+              {/* CONTENT AREA: Centered on mobile/tablet, Left-aligned on Desktop */}
+              <div className="flex-1 text-center lg:text-left">
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-5xl sm:text-6xl lg:text-8xl font-black italic text-white uppercase mb-6 leading-tight tracking-tighter">
+                    THE <span className="text-purple-500">VISIONARY.</span>
+                  </h2>
+                  
+                  <p className="text-slate-400 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto lg:mx-0 lg:border-l-2 border-purple-500/30 lg:pl-6">
+                    I bridge the gap between technical logic and visual storytelling. As a 4th year BSIT student with a passion for <b className="text-white">UI/UX</b> and <b className="text-white">Motion Design</b>, I help brands solve problems through creative precision.
+                  </p>
+
+                  {/* ROLES: Compact Grid */}
+                  <div className="flex flex-wrap items-center justify-center lg:justify-between gap-6 mb-12 w-full">
+                    {[
+                      { role: 'UI/UX Designer', tech: 'Interfaces // Figma', color: 'bg-purple-500', id: 'uiux' },
+                      { role: 'Video Editor', tech: 'Motion // DaVinci', color: 'bg-fuchsia-500', id: 'video' },
+                      { role: 'Graphic Designer', tech: 'Branding // AI & PS', color: 'bg-blue-500', id: 'graphic' }
+                    ].map((item) => (
+                      <div key={item.id} className="group min-w-fit">
+                        <div className="flex items-center justify-center lg:justify-start gap-2 mb-1">
+                          <div className={`w-[3px] h-4 ${item.color} rounded-full group-hover:h-6 transition-all duration-300`} />
+                          <p className="text-white font-black text-lg uppercase italic leading-none whitespace-nowrap">
+                            {item.role}
+                          </p>
+                        </div>
+                        <p className="text-[8px] text-slate-500 tracking-[0.2em] font-bold uppercase lg:pl-3">
+                          {item.tech}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {/* BUTTONS: Responsive Wrap */}
+                  <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                    <motion.button 
+                      onClick={() => setIsResumeOpen(true)}
+                      className="px-8 py-4 bg-white text-black font-black text-[10px] uppercase tracking-widest rounded-xl hover:bg-purple-600 hover:text-white transition-all shadow-xl"
+                    >
+                      Resume
+                    </motion.button>
+                    <motion.a 
+                      href="#works"
+                      className="px-8 py-4 border border-fuchsia-500/40 text-fuchsia-400 font-black text-[10px] uppercase tracking-widest rounded-xl hover:bg-fuchsia-500 hover:text-white transition-all flex items-center justify-center"
+                    >
+                      Explore Studio
+                    </motion.a>
+                    <motion.a 
+                      href="#contact"
+                      className="px-8 py-4 border border-slate-800 text-white font-black text-[10px] uppercase tracking-widest rounded-xl hover:border-purple-500 flex items-center justify-center transition-all"
+                    >
+                      Contact
+                    </motion.a>
+                  </div>
+                </motion.div>
+              </div>
             </div>
           </div>
-        </div>
       </section>
 
       {/* WORKS SECTION - Scroll Triggered */}
