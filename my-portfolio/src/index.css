@@ -19,6 +19,10 @@ html {
   scroll-behavior: smooth;
 }
 
+section {
+  scroll-margin-top: 100px;
+}
+
 /* Custom scrollbar to match purple theme */
 ::-webkit-scrollbar {
   width: 8px;
@@ -29,4 +33,37 @@ html {
 ::-webkit-scrollbar-thumb {
   background: #7c3aed;
   border-radius: 10px;
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+}
+
+/* Adds that premium smooth scroll feel */
+html {
+  scroll-behavior: smooth;
+  cursor: default;
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  /* Rotate 180 so it reads from bottom to top, or keep as is for top-to-bottom */
+  transform: rotate(180deg); 
+  display: inline-block;
+}
+
+/* Ensure the text is actually visible even if stroke fails */
+.stroke-text {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+  color: transparent;
+}
+/* Fallback for browsers that don't support stroke-text well */
+@supports not (-webkit-text-stroke: 1px white) {
+  .stroke-text {
+    color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
 }

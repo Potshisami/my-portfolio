@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'; 
 import { motion, AnimatePresence } from 'framer-motion';
+import { Icon } from '@iconify/react';
 import { X, ExternalLink, Github, Mail, Code, Video, Palette, ChevronLeft, ChevronRight, Facebook, Sparkles, Box, Triangle, Circle } from 'lucide-react';
 
 const Portfolio = () => {
@@ -9,6 +10,29 @@ const Portfolio = () => {
   const [selectedCert, setSelectedCert] = useState(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [currentImgIdx, setCurrentImgIdx] = useState(0);
+  const [hoveredRole, setHoveredRole] = useState(null);
+  const [activeTool, setActiveTool] = useState('design');
+
+  // Animation Variants for re-use
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } 
+    }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
 
   const handleMouseMove = (e) => {
     setMousePos({
@@ -30,7 +54,7 @@ const Portfolio = () => {
       mail: "vivianbangcoyo@gmail.com",
       facebook: "https://www.facebook.com/PotshIsamixzxc/"
     },
-    about: `I bridge the gap between creative vision and technical execution. Specializing in UI/UX Design and Multimedia Arts, I craft high-impact digital experiences through a blend of aesthetic precision and functional code.`,
+    about: `I help brands tell their story and solve their problems. From producing high-impact motion graphics and video that hooks an audience, to architecting user-centric UI/UX designs that drive conversion, my work is about more than just looks. I combine creative media with functional design to help brands tell better stories and hit their growth goals.`,
     resumeLink: "https://drive.google.com/file/d/1t7ogBrPV3adn_Oh_DgAeJX1c6JshpeGV/view?usp=sharing"
   };
 
@@ -42,8 +66,8 @@ const Portfolio = () => {
         tags: ["Figma"],
         icon: <Code className="w-5 h-5" />,
         role: "Lead UI/UX Designer & Front-End Developer",
-        link: "https://www.figma.com/design/YzNZ2JM78AQQP44OwX8RnJ/MC-LEGAL-OFFICE?node-id=0-1&t=GwC2zOppc9q1tFO3-1",
-        previewImage: "/images/legalities-preview.png"
+        link: "https://embed.figma.com/design/YzNZ2JM78AQQP44OwX8RnJ/Malaybalay-City-Legal-Office?node-id=0-1&embed-host=share",
+        previewImage: "/images/APP-Legalities.jpg"
     },
     {
         title: "BukSU Smart Governance",
@@ -51,18 +75,9 @@ const Portfolio = () => {
         description: "Highlights the commitment of Smart Governance at BukSU, driving institutional excellence through digital transformation.",
         tags: ["After Effects", "Davinci Resolve"],
         icon: <Video className="w-5 h-5" />,
-        videoSrc: "/videos/BukSU-SmartGovernance.mp4",
+        previewVideo: "/videos/BukSU-SmartGovernance.mp4",
+        videoSrc: "https://drive.google.com/file/d/1cJgQ-UQ0NMOl5kvoAqlv2VxB9Leml0lF/preview",
         role: "Lead Editor & Motion Designer"
-    },
-    {
-        title: "Kuripot Chronicles",
-        category: "UI/UX",
-        description: "A witty and student-friendly Budget & Allowance Tracker Android App built using Java in Android Studio.",
-        role: "Lead UI/UX Designer & Front-End Developer",
-        tags: ["Mobile App", "Figma"],
-        icon: <Palette className="w-5 h-5" />,
-        link: "https://www.figma.com/design/OFIW2HhNDfjCAOz6ChItoP/Kuripot-Chronicles?node-id=0-1&t=IwZQBwS1n4Haron6-1",
-        previewImage: "/images/kuripot-preview.png"
     },
     {
         title: "Kaamulan 2025",
@@ -71,8 +86,8 @@ const Portfolio = () => {
         role: "Lead Editor",
         tags: ["Videography", "Davinci Resolve", "Capcut"],
         icon: <Video className="w-5 h-5" />,
-        videoSrc: "/videos/KAAMULAN-REELS.mp4",
-        previewImage: "/images/kuripot-preview.png"
+        previewVideo: "/videos/KAAMULAN-REELS.mp4",
+        videoSrc: "https://drive.google.com/file/d/1M3WWsh3HXXFNA_Ciei1myHZuKvz2ZXu_/preview",
     },
      {
         title: "EcoQuest",
@@ -81,8 +96,8 @@ const Portfolio = () => {
         tags: ["Mobile App", "Figma"],
         icon: <Code className="w-5 h-5" />,
         role: "Lead UI/UX Designer & Front-End Developer",
-        link: "https://www.figma.com/design/9kABlns2XXdRi6nqX4NSk2/EcoQuest?node-id=0-1&t=yBC8YJTHyvqVeNcB-1",
-        previewImage: "/images/ecoquest-preview.png"
+        link: "https://embed.figma.com/design/9kABlns2XXdRi6nqX4NSk2/EcoQuest?node-id=0-1&embed-host=share",
+        previewImage: "/images/APP-EcoQuest.jpg"
     },
     {
         title: "DYD Katorse Day 1 Highlights",
@@ -91,7 +106,18 @@ const Portfolio = () => {
         role: "Same Day Editor",
         tags: ["Videography", "Davinci Resolve"],
         icon: <Video className="w-5 h-5" />,
-        videoSrc: ["/videos/DYDSDE-DAY1.mp4"],
+        previewVideo: "/videos/DYDSDE-DAY1.mp4",
+        videoSrc: "https://drive.google.com/file/d/1Vcr7WNirRT8DAldBWeoCFX8MoeYx74XC/preview",
+    },
+    {
+        title: "Kuripot Chronicles",
+        category: "UI/UX",
+        description: "A witty and student-friendly Budget & Allowance Tracker Android App built using Java in Android Studio.",
+        role: "Lead UI/UX Designer & Front-End Developer",
+        tags: ["Mobile App", "Figma"],
+        icon: <Palette className="w-5 h-5" />,
+        link: "https://embed.figma.com/design/OFIW2HhNDfjCAOz6ChItoP/Kuripot-Chronicles?node-id=0-1&embed-host=share",
+        previewImage: "/images/APP-Kuripot.jpg"
     },
     {
         title: "DYD Katorse Day 2 Highlights",
@@ -100,7 +126,8 @@ const Portfolio = () => {
         role: "Same Day Editor",
         tags: ["Videography", "Davinci Resolve"],
         icon: <Video className="w-5 h-5" />,
-        videoSrc: ["/videos/DYDSDE-DAY2.mp4"],
+        previewVideo: "/videos/DYDSDE-DAY2.mp4",
+        videoSrc: "https://drive.google.com/file/d/1nY41BORUtV5lvrUnhW5UCg5QsLuKLZFJ/preview"
     },
     {
         title: "DYD Katorse Day 3 Highlights",
@@ -109,7 +136,8 @@ const Portfolio = () => {
         role: "Same Day Editor",
         tags: ["Videography", "Davinci Resolve"],
         icon: <Video className="w-5 h-5" />,
-        videoSrc: ["/videos/DYDSDE-DAY3.mp4"],
+        previewVideo: "/videos/DYDSDE-DAY3.mp4",
+        videoSrc: "https://drive.google.com/file/d/13yhXB-0NHBUJlfbP4M8Rhb21PFG8ARsV/preview"
     },
     {
         title: "JEMIMAH FoodHub Promotional Video",
@@ -118,7 +146,8 @@ const Portfolio = () => {
         role: "Videographer & Editor",
         tags: ["Videography", "Davinci Resolve"],
         icon: <Video className="w-5 h-5" />,
-        videoSrc: ["/videos/JEMIMAH-PROMOTIONAL.mp4"],
+        previewVideo: "/videos/JEMIMAH-PROMOTIONAL.mp4",
+        videoSrc: "https://drive.google.com/file/d/1N6_SQngKWkZYCZup9GxUpyT4OaRrduer/preview"
     },
     {
         title: "39th CFC Bukidnon Anniversary Moving Logo",
@@ -127,7 +156,8 @@ const Portfolio = () => {
         role: "Motion Designer",
         tags: ["After Effects"],
         icon: <Video className="w-5 h-5" />,
-        videoSrc: ["/videos/MOVINGLOGO-39THANNIV.mp4"],
+        previewVideo: "/videos/MOVINGLOGO-39THANNIV.mp4",
+        videoSrc: "https://drive.google.com/file/d/1148coA39Q6EPei_al2K5PW2ExyVbNpEe/preview"
     },
     {
         title: "39th CFC Bukidnon Anniversary Same Day Edit",
@@ -136,7 +166,8 @@ const Portfolio = () => {
         role: "Same Day Editor",
         tags: ["Videography", "Davinci Resolve"],
         icon: <Video className="w-5 h-5" />,
-        videoSrc: ["/videos/SDE-CFCANNIV2023.mov"],
+        previewVideo: "/videos/SDE-CFCANNIV2023.mp4",
+        videoSrc: "https://drive.google.com/file/d/1fFgO20ZxLiQ92Kp7ZeXQhe12K3bf5Fn3/preview"
     },
     {
         Title: "Project Worship Grace Abounds Moving Logo",
@@ -145,7 +176,8 @@ const Portfolio = () => {
         role: "Motion Designer",
         tags: ["After Effects"],
         icon: <Video className="w-5 h-5" />,
-        videoSrc: ["/videos/MovingLogo-GraceAbounds.mp4"]
+        previewVideo: "/videos/MovingLogo-GraceAbounds.mp4",
+        videoSrc: "https://drive.google.com/file/d/14KE9iZ967O40nMwNjP_WgqhXKyawtVV5/preview"
     },
     {
         title: "San Miguel Beer Night & Kadayawan Festival Highlights",
@@ -154,7 +186,8 @@ const Portfolio = () => {
         role: "Videographer & Editor",
         tags: ["Videography", "Davinci Resolve"],
         icon: <Video className="w-5 h-5" />,
-        videoSrc: ["/videos/HIGHLIGHTS-SMBFINAL.mp4"],
+        previewVideo: "/videos/HIGHLIGHTS-SMBFINAL.mp4",
+        videoSrc: "https://drive.google.com/file/d/1is-rz_2sU0kfd7nGyS8JmglZrGlrD4O-/preview"
     },
     {
         title: "YFC Bukidnon Conference 2025 Same Day Edit",
@@ -163,7 +196,18 @@ const Portfolio = () => {
         role: "Same Day Editor",
         tags: ["Video Editing", "Davinci Resolve", "After Effects"],
         icon: <Video className="w-5 h-5" />,
-        videoSrc: ["/videos/BCON2025-HIGHLIGHTS.mp4"],
+        previewVideo: "/videos/BCON2025-HIGHLIGHTS.mp4",
+        videoSrc: "https://drive.google.com/file/d/1F2_iaR-Gvd3FHZzxTkNANUTal8z5ExJk/preview"
+    },
+    {
+        title: "Contemporary Project Film",
+        category: "Video",
+        description: "",
+        role: "Lead Editor",
+        tags: ["Video Editing", "Davinci Resolve", "After Effects"],
+        icon: <Video className="w-5 h-5" />,
+        previewVideo: "/videos/CONTEMPO-FILM.mp4",
+        videoSrc: "https://drive.google.com/file/d/1-mMkTCMjwmlUbywCuhTdEb5ENsh1z60m/preview"
     },
     {
         title: "RV App",
@@ -172,8 +216,8 @@ const Portfolio = () => {
         role: "Lead UI/UX Designer",
         tags: ["Figma"],
         icon: <Palette className="w-5 h-5" />,
-        link: "https://www.figma.com/design/PEyHt9JhAqfTcg48RSi7rb/Untitled--Copy-?node-id=0-1&t=q1aEeyasd9wFEmmb-1",
-        previewImage: "/images/rvapp-preview.png"
+        link: "https://embed.figma.com/design/PEyHt9JhAqfTcg48RSi7rb/RV-App?node-id=0-1&embed-host=share",
+        previewImage: "/images/APP-RV.jpg"
     },
     {
         title: "BukSU Engage",
@@ -182,8 +226,8 @@ const Portfolio = () => {
         role: "Lead UI/UX Designer",
         tags: ["Figma"],
         icon: <Palette className="w-5 h-5" />,
-        link: "https://www.figma.com/design/JySNE4HEg9epC2uNdW6B4i/BukSU-Engage?node-id=0-1&t=uzsrVS7qMRqr1Jau-1",
-        previewImage: "/images/rvapp-preview.png"
+        link: "https://embed.figma.com/design/JySNE4HEg9epC2uNdW6B4i/BukSU-Engage?node-id=0-1&embed-host=share",
+        previewImage: "/images/APP-BukSUEngage.jpg"
     },
 
     {
@@ -253,9 +297,7 @@ const Portfolio = () => {
         tags: ["Photoshop", "Canva"],
         icon: <Palette className="w-5 h-5" />,
         previewImage: "/images/DM-4.jpg",
-        images: [
-            "/images/DM-4.jpg",
-        ],
+        images: ["/images/DM-4.jpg"],
     },
     {   
         title: "Digital Marketing Publication Material",
@@ -265,9 +307,7 @@ const Portfolio = () => {
         tags: ["Photoshop", "Canva"],
         icon: <Palette className="w-5 h-5" />,
         previewImage: "/images/DM-2.jpg",
-        images: [
-            "/images/DM-2.jpg",
-        ],
+        images: ["/images/DM-2.jpg"],
     },  
   ];
 
@@ -331,91 +371,259 @@ const Portfolio = () => {
   
   const currentFiltered = projects.filter(p => filter === 'All' ? true : p.category === filter);
   const displayedProjects = filter === 'All' ? currentFiltered.slice(0, 7) : currentFiltered;
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const updateScrollProgress = () => {
+      const currentScroll = window.scrollY;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollHeight) {
+        setScrollProgress((currentScroll / scrollHeight) * 100);
+      }
+    };
+    window.addEventListener("scroll", updateScrollProgress);
+    return () => window.removeEventListener("scroll", updateScrollProgress);
+  }, []);
 
   return (
-    <div onMouseMove={handleMouseMove} className="min-h-screen bg-slate-950 text-slate-100 selection:bg-purple-500/30 font-sans overflow-x-hidden">
-      
+    <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-purple-500/30 font-sans overflow-x-hidden">
+
+      {/* 2. Scroll Progress Bar */}
+      <motion.div 
+        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-violet-600 to-fuchsia-600 z-[100] origin-left"
+        style={{ width: `${scrollProgress}%` }}
+      />
+
+      {/* 3. Mouse Spotlight Effect */}
+      <div 
+        className="fixed inset-0 z-0 pointer-events-none opacity-40 md:opacity-100"
+        style={{
+          background: `radial-gradient(600px circle at ${mousePos.x * 40 + (window.innerWidth / 2)}px ${mousePos.y * 40 + (window.innerHeight / 2)}px, rgba(139, 92, 246, 0.08), transparent 80%)`
+        }}
+      />
+
       {/* Navbar */}
-      <nav className="p-6 flex justify-between items-center fixed w-full z-50 backdrop-blur-md bg-slate-950/50">
-        <span className="text-xl font-bold tracking-tighter bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent uppercase">V.B.</span>
-        <div className="space-x-8 text-sm uppercase tracking-widest font-medium">
-          <a href="#work" className="hover:text-purple-400 transition-colors text-slate-400">Work</a>
-          <a href="#contact" className="hover:text-purple-400 transition-colors text-slate-400">Contact</a>
-        </div>
-      </nav>
-      
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center px-6 md:px-24 relative z-10 overflow-hidden bg-slate-950">
-        
-        {/* Particles RESTORED in Hero Only */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          {[...Array(25)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-purple-400 rounded-full"
-              initial={{ x: Math.random() * 2000, y: Math.random() * 1000, opacity: 0.6 }}
-              animate={{ x: [null, Math.random() * 200 - 100], y: [null, Math.random() * 200 - 100] }}
-              transition={{ duration: Math.random() * 20 + 20, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
-            />
+      <motion.nav 
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="p-6 flex justify-between items-center fixed w-full z-50 backdrop-blur-md bg-slate-950/50 border-b border-white/5"
+      >
+        <span className="text-xl font-bold tracking-tighter bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent uppercase cursor-default">V.B.</span>
+        <div className="hidden md:flex space-x-10 text-[10px] uppercase tracking-[0.2em] font-bold">
+          {/* Use standard anchors with hover scale for cursor interaction */}
+          {['Home', 'About Me', 'Works', "Stack", 'Achievements', 'Contact'].map((item) => (
+            <motion.a 
+              key={item}
+              href={`/#${item.toLowerCase()}`} 
+              whileHover={{ scale: 1.1 }}
+              className="hover:text-purple-400 transition-colors text-slate-400"
+            >
+              {item}
+            </motion.a>
           ))}
         </div>
+      </motion.nav>
 
-        <div className="flex flex-col md:flex-row items-center justify-between w-full gap-12 pt-24 md:pt-0 relative z-10">
+
+        {/*HERO SECTION*/}
+      <section id="home" className="min-h-screen bg-slate-950 flex flex-col justify-center overflow-hidden relative">
+        {/* Layer 1: Flickering Work Previews */}
+        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
           <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }}
-            className="relative group md:order-2"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-full blur-[80px] opacity-20 animate-pulse"></div>
-            <div className="relative w-64 h-64 md:w-96 md:h-96 lg:w-[480px] lg:h-[480px] rounded-full p-2 bg-gradient-to-tr from-violet-500 via-fuchsia-500 to-transparent shadow-2xl">
-              <div className="w-full h-full rounded-full overflow-hidden border-[8px] border-slate-950 bg-[#8b5cf6] relative">
-                <img src="/images/profile-transparent.png" alt="Profile" className="w-full h-full object-cover z-10 relative" />
-                <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
-              </div>
-            </div>
-          </motion.div>
+            animate={{ opacity: [0, 0.5, 0] }}
+            transition={{ duration: 0.2, repeat: Infinity, repeatDelay: 3 }}
+            className="absolute inset-0 bg-[url('/images/legalities-preview.png')] bg-cover bg-center"
+          />
+        </div>
 
-          <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} className="flex-1 text-center md:text-left md:order-1">
-            <p className="text-purple-400 font-mono mb-4 text-sm tracking-widest uppercase font-bold">UI/UX and Creative Media Enthusiast</p>
-            <h1 className="text-5xl md:text-9xl font-black mb-6 tracking-tighter leading-none text-white uppercase italic">
-              Vivian <br/><span className="bg-gradient-to-r from-violet-500 via-fuchsia-500 to-purple-500 bg-clip-text text-transparent">Bangcoyo.</span>
-            </h1>
-            <p className="max-w-xl mx-auto md:mx-0 text-slate-400 leading-relaxed text-lg mb-10 border-l-0 md:border-l-2 border-purple-500/30 pl-0 md:pl-6">{profile.about}</p>
-            <div className="flex justify-center md:justify-start gap-6">
-              <motion.a whileHover={{ scale: 1.05 }} href="#work" className="px-10 py-5 bg-white text-black font-black rounded-2xl transition-all uppercase tracking-widest text-xs hover:bg-purple-500 hover:text-white">Explore</motion.a>
-              <motion.button whileHover={{ scale: 1.05 }} onClick={() => setIsResumeOpen(true)} className="px-10 py-5 border border-slate-800 text-white font-bold rounded-2xl transition-all uppercase tracking-widest text-xs hover:border-purple-500">Resume</motion.button>
+        {/* Layer 2: Moving Text */}
+        <div className="relative z-10 space-y-4">
+          <div className="flex whitespace-nowrap overflow-hidden border-y border-white/5 py-4">
+            <motion.div 
+              animate={{ x: [0, -1000] }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="text-[15vw] md:text-[12vw] font-black uppercase italic leading-none flex gap-10 md:gap-20 text-white"
+            >
+              <span>Vivian Bangcoyo</span>
+              <span>Vivian Bangcoyo</span>
+            </motion.div>
+          </div>
+
+          <div className="flex whitespace-nowrap overflow-hidden py-4">
+            <motion.div 
+              animate={{ x: [-1000, 0] }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="text-[15vw] md:text-[12vw] font-black uppercase italic leading-none flex gap-10 md:gap-20 text-transparent stroke-text"
+              style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}
+            >
+              <span>UI/UX & Motion</span>
+              <span>UI/UX & Motion</span>
+            </motion.div>
+          </div>
+        </div>
+        
+        {/* Responsive Footer Info - Matches your 1400px constraint */}
+        <div className="max-w-[1400px] mx-auto w-full mt-12 md:mt-20 px-6 md:px-20 flex flex-col md:flex-row justify-between items-center md:items-end gap-10 z-10">
+          <p className="text-slate-500 font-mono text-[9px] uppercase tracking-widest text-center md:text-left">
+            Multimedia & UI/UX Designer Portfolio ©2026
+          </p>
+          <motion.a 
+            href="#works"
+            whileHover={{ x: 10 }}
+            className="group flex items-center gap-4 text-white no-underline"
+          >
+            <div className="flex flex-col items-end md:items-start text-right md:text-left">
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-purple-500 mb-1">Portfolio</span>
+              <span className="text-xl md:text-2xl font-black italic uppercase tracking-tighter group-hover:text-fuchsia-500 transition-colors">
+                Enter The Studio.
+              </span>
             </div>
-          </motion.div>
+            <div className="w-8 md:w-12 h-[1px] bg-white/20 group-hover:w-20 group-hover:bg-fuchsia-500 transition-all duration-500" />
+          </motion.a>
         </div>
       </section>
 
-      {/* Artifacts Section */}
-      <section id="work" className="py-32 px-6 md:px-20 bg-slate-950 relative z-10">
-        
-        {/* AMBIENT SIDE DECORATIONS */}
-        <div className="absolute top-40 -left-20 opacity-10 pointer-events-none hidden lg:block">
-            <motion.div animate={{ rotate: 360 }} transition={{ duration: 25, repeat: Infinity, ease: "linear" }}>
-                <Box size={280} className="text-purple-500" />
-            </motion.div>
-        </div>
-        <div className="absolute bottom-60 -right-20 opacity-10 pointer-events-none hidden lg:block">
-            <motion.div animate={{ y: [0, 40, 0], rotate: [0, 15, 0] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}>
-                <Triangle size={320} className="text-fuchsia-500" />
-            </motion.div>
-        </div>
-        <div className="absolute top-1/2 left-10 opacity-20 pointer-events-none hidden lg:block">
-            <motion.div animate={{ scale: [1, 1.15, 1], x: [0, 10, 0] }} transition={{ duration: 6, repeat: Infinity }}>
-                <Circle size={45} className="text-violet-400" />
-            </motion.div>
-        </div>
-        <div className="absolute bottom-1/3 right-16 opacity-20 pointer-events-none hidden lg:block">
-            <Sparkles size={70} className="text-purple-300 animate-pulse" />
+      {/* ABOUT ME WITH MOVING OBJECTS */}
+      <section id="about" className="py-24 bg-slate-950 relative overflow-hidden">
+        {/* --- MOVING OBJECTS LAYER --- */}
+        <div className="absolute inset-0 pointer-events-none opacity-30">
+          <AnimatePresence>
+            {hoveredRole === 'uiux' && (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.5 }}
+                className="absolute top-1/4 right-1/4 text-purple-500/20"
+              >
+                <Icon icon="logos:figma" className="text-[120px] md:text-[200px]" />
+              </motion.div>
+            )}
+            
+            {hoveredRole === 'video' && (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.5 }}
+                className="absolute bottom-1/4 right-1/3 text-fuchsia-500/20"
+              >
+                <Icon icon="simple-icons:davinciresolve" className="text-[100px] md:text-[180px]" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <motion.div
+            animate={{ y: [0, -20, 0], x: [0, 20, 0] }}
+            transition={{ duration: 5, repeat: Infinity }}
+            className="absolute top-1/2 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-purple-600/10 rounded-full blur-[80px] md:blur-[120px]"
+          />
         </div>
 
+        <div className="max-w-[1400px] mx-auto px-6 md:px-20 relative z-10">
+          <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-24">
+            
+            {/* PROFILE IMAGE: Shrinks on mobile */}
+            <motion.div 
+              className="relative shrink-0"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+            >
+              <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                className="absolute -inset-4 md:-inset-6 border-2 border-dashed border-purple-500/20 rounded-full"
+              />
+              
+              <div className="relative w-60 h-60 md:w-96 md:h-96 rounded-full p-2 bg-gradient-to-tr from-purple-600 to-fuchsia-500 shadow-2xl">
+                <div className="w-full h-full rounded-full overflow-hidden border-[6px] md:border-[8px] border-slate-950 bg-purple-600">
+                  <img 
+                    src="/images/profile-transparent.png" 
+                    alt="Vivian J. Bangcoyo" 
+                    className="w-full h-full object-cover" 
+                  />
+                </div>
+              </div>
+            </motion.div>
+
+            {/* CONTENT AREA */}
+            <div className="flex-1 text-center md:text-left">
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-5xl md:text-8xl font-black italic text-white uppercase mb-6 leading-none tracking-tighter">
+                  THE <span className="text-purple-500">VISIONARY.</span>
+                </h2>
+                
+                <p className="text-slate-400 text-sm md:text-base leading-relaxed mb-10 max-w-xl md:border-l-4 border-purple-500/30 md:pl-6">
+                  I help brands tell their story and solve their problems. As a 4th year BSIT student with a deep passion for <b>UI/UX</b> and <b>Digital Marketing</b>, I bridge the gap between technical logic and visual storytelling.
+                </p>
+
+                {/* ROLES: Stacks on mobile */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-4 lg:gap-8 mb-12 w-full">
+                  {[
+                    { role: 'UI/UX Designer', tech: 'Interfaces // Figma', color: 'bg-purple-500', id: 'uiux' },
+                    { role: 'Video Editor', tech: 'Motion // DaVinci', color: 'bg-fuchsia-500', id: 'video' },
+                    { role: 'Graphic Designer', tech: 'Branding // AI & PS', color: 'bg-blue-500', id: 'graphic' }
+                  ].map((item) => (
+                    <motion.div 
+                      key={item.id}
+                      onMouseEnter={() => setHoveredRole(item.id)}
+                      onMouseLeave={() => setHoveredRole(null)}
+                      className="group min-w-fit"
+                    >
+                      <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
+                        <div className={`w-[3px] h-4 ${item.color} rounded-full group-hover:h-6 transition-all duration-300`} />
+                        <p className="text-white font-black text-lg md:text-xl uppercase italic leading-none whitespace-nowrap group-hover:text-purple-400 transition-colors">
+                          {item.role}
+                        </p>
+                      </div>
+                      <p className="text-[8px] text-slate-500 tracking-[0.2em] font-bold uppercase md:pl-3">
+                        {item.tech}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+                
+                {/* BUTTONS: Stack or wrap on small screens */}
+                <div className="flex flex-wrap justify-center md:justify-start gap-4">
+                  <motion.button 
+                    onClick={() => setIsResumeOpen(true)}
+                    className="flex-1 md:flex-none px-8 py-4 bg-white text-black font-black text-[10px] uppercase tracking-widest rounded-xl hover:bg-purple-600 hover:text-white transition-all shadow-xl"
+                  >
+                    Resume
+                  </motion.button>
+
+                  <motion.a 
+                    href="#works"
+                    className="flex-1 md:flex-none px-8 py-4 border border-fuchsia-500/50 text-fuchsia-400 font-black text-[10px] uppercase tracking-widest rounded-xl hover:bg-fuchsia-500 hover:text-white flex items-center justify-center transition-all duration-300"
+                  >
+                    Works
+                  </motion.a>
+
+                  <motion.a 
+                    href="#contact"
+                    className="flex-1 md:flex-none px-8 py-4 border border-slate-800 text-white font-black text-[10px] uppercase tracking-widest rounded-xl hover:border-purple-500 flex items-center justify-center transition-all"
+                  >
+                    Contact
+                  </motion.a>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WORKS SECTION - Scroll Triggered */}
+      <section id="works" className="py-32 px-6 md:px-20 bg-slate-950 relative z-10">
         <div className="max-w-[1400px] mx-auto relative z-20">
           <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
             className="flex flex-col md:flex-row justify-between items-center mb-24 gap-8 text-center md:text-left"
           >
             <h3 className="text-5xl md:text-7xl font-black tracking-tighter uppercase italic text-white leading-none">My <span className="text-purple-600">Works</span></h3>
@@ -432,87 +640,189 @@ const Portfolio = () => {
             </div>
           </motion.div>
 
-          {/* DYNAMIC MASONRY FLOW ENGINE */}
-          <motion.div key={filter} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
-            <AnimatePresence mode='wait'>
-              {displayedProjects.map((project, idx) => {
+          {/* DYNAMIC FLOW ENGINE with Staggered children */}
+            <motion.div 
+              key={filter} 
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className={
+                (filter === 'Video' || filter === 'All') 
+                  ? "columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8" 
+                  : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              }
+            >
+              <AnimatePresence mode='wait'>
+                {displayedProjects.map((project, idx) => {
                 const isGraphics = project.category === "Graphics";
                 const isVideo = project.category === "Video";
                 const isUI = project.category === "UI/UX";
 
-                return (
-                  <motion.div 
-                    layout key={`${filter}-${project.title}`} 
-                    initial={{ opacity: 0, y: 30 }} 
-                    animate={{ opacity: 1, y: 0 }} 
-                    exit={{ opacity: 0, scale: 0.95 }} 
-                    transition={{ duration: 0.4, delay: idx * 0.05 }} 
-                    onClick={() => setSelectedProject(project)}
-                    whileHover={{ y: -10 }}
-                    className="break-inside-avoid relative group cursor-pointer rounded-[40px] overflow-hidden border border-white/5 bg-slate-900 shadow-2xl hover:border-purple-500/50 transition-all duration-700"
-                  >
-                    {isGraphics ? (
-                      <div className="w-full h-auto overflow-hidden">
-                        <img src={project.previewImage} alt={project.title} className="w-full h-auto object-cover transition-all duration-1000 group-hover:scale-110" />
-                      </div>
-                    ) : isVideo ? (
-                      <div className="relative w-full overflow-hidden bg-black">
-                        <video src={Array.isArray(project.videoSrc) ? project.videoSrc[0] : project.videoSrc} autoPlay muted loop playsInline className="w-full h-auto opacity-70 group-hover:opacity-100 transition-all" />
-                      </div>
-                    ) : (
-                      <div className="p-10 flex flex-col justify-between min-h-[380px] bg-slate-900/40 backdrop-blur-md">
-                         <div className="w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-400 border border-purple-500/20">{project.icon}</div>
-                         <div className="mt-12">
-                           <span className="text-purple-500 font-mono text-[9px] uppercase tracking-[0.4em] font-black mb-3 block">System Interface</span>
-                           <h4 className="text-3xl font-black text-white italic uppercase tracking-tighter leading-tight group-hover:text-purple-300 transition-colors">{project.title}</h4>
-                           <p className="text-slate-500 text-xs mt-4 line-clamp-3 leading-relaxed">{project.description}</p>
-                         </div>
-                      </div>
-                    )}
-                    
-                    {(isGraphics || isVideo) && (
+                  return (
+                    <motion.div 
+                      variants={fadeInUp}
+                      layout 
+                      key={`${filter}-${project.title}`} 
+                      onClick={() => setSelectedProject(project)}
+                      whileHover={{ y: -15, transition: { type: "spring", stiffness: 300 } }}
+                      className="inline-block w-full relative group cursor-pointer rounded-[40px] overflow-hidden border border-white/5 bg-slate-900 shadow-2xl hover:border-purple-500/50 transition-all duration-700"
+                    >
+                      {/* 1. THE MEDIA LAYER */}
+                      {isVideo ? (
+                        /* Video Preview - Staggered Masonry */
+                        <div className={`relative w-full overflow-hidden bg-black ${idx % 3 === 0 ? 'aspect-[3/4]' : idx % 2 === 0 ? 'aspect-video' : 'aspect-square'}`}>
+                          <div className="absolute inset-0 w-full h-full">
+                            <video 
+                              key={`${project.title}-stable-video`}
+                              src={project.previewVideo}
+                              autoPlay muted loop playsInline preload="auto"
+                              className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" 
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        /* UI/UX & Graphics Preview - Show Image */
+                        <div className="w-full aspect-square overflow-hidden bg-slate-800 relative">
+                          <img 
+                            src={project.previewImage} 
+                            alt={project.title} 
+                            className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110" 
+                          />
+                          {/* Visual overlay for both UI and Graphics */}
+                          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        </div>
+                      )}
+                      
+                      {/* 2. THE OVERLAY LAYER (Appears for all items now) */}
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80 group-hover:opacity-95 transition-opacity">
-                        <div className="absolute bottom-0 left-0 p-8 w-full translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <span className="text-purple-500 font-mono text-[9px] uppercase tracking-[0.4em] font-black mb-2 block">{isVideo ? "Motion" : "Art"}</span>
-                            <h4 className="text-xl font-black text-white italic uppercase tracking-widest leading-tight">{project.title}</h4>
+                        <div className="absolute bottom-0 left-0 p-6 w-full translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                            <div className="flex items-center gap-2 mb-1">
+                              <div className="w-1 h-1 rounded-full bg-purple-500 animate-pulse" />
+                              <span className="text-purple-500 font-mono text-[8px] uppercase tracking-[0.3em] font-black">
+                                {isVideo ? "Motion Capture" : isUI ? "System Interface" : "Creative Media"}
+                              </span>
+                            </div>
+                            <h4 className="text-lg font-black text-white italic uppercase tracking-widest leading-tight">
+                              {project.title}
+                            </h4>
                         </div>
                       </div>
-                    )}
-                  </motion.div>
-                );
-              })}
-            </AnimatePresence>
-          </motion.div>
-
-          {filter === 'All' && (
-            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="mt-24 flex justify-center">
-              <motion.button whileHover={{ scale: 1.05 }} onClick={() => { setFilter('Video'); setTimeout(() => document.getElementById('work').scrollIntoView({ behavior: 'smooth' }), 100); }}
-                className="group relative px-12 py-5 bg-white text-black font-black rounded-2xl uppercase tracking-widest text-xs overflow-hidden shadow-2xl"
-              >
-                <span className="relative z-10 flex items-center gap-3">View More Motion Work <Video size={16}/></span>
-                <div className="absolute inset-0 bg-purple-500 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300" />
-              </motion.button>
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
             </motion.div>
-          )}
         </div>
       </section>
 
-      {/* Tech Stack */}
-      <section className="py-24 px-10 md:px-24 bg-slate-950 border-t border-white/5 relative z-10">
-        <div className="max-w-[1400px] mx-auto text-center">
-          <motion.h3 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="text-4xl font-black mb-16 text-white uppercase italic">Tech Stack.</motion.h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-center">
-            {skillCategories.map((cat, i) => (
+      {/* TECH STACK */}
+        {/* ANIMATED TECH STACK */}
+      <section id="stack" className="py-24 bg-slate-950 border-t border-white/5 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-20">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16 flex items-end justify-between"
+          >
+            <h3 className="text-4xl md:text-6xl font-black text-white italic uppercase tracking-tighter">
+              Tech <span className="text-purple-500">Stack.</span>
+            </h3>
+            <p className="text-slate-500 font-mono text-[9px] uppercase tracking-[0.3em] hidden md:block">
+              BSIT // UI UX // Multimedia
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 gap-12">
+            {[
+              { 
+                category: "Design & Creative", 
+                skills: [
+                  { name: 'Figma', icon: 'logos:figma' },
+                  { name: 'Illustrator', icon: 'logos:adobe-illustrator' },
+                  { name: 'Photoshop', icon: 'logos:adobe-photoshop' },
+                  { name: 'Canva', icon: 'lineicons:canva' },
+                ]
+              },
+              { 
+                category: "Media Production", 
+                skills: [
+                  { name: 'After Effects', icon: 'skill-icons:aftereffects' },
+                  { name: 'DaVinci', icon: 'simple-icons:davinciresolve' },
+                  { name: 'CapCut', icon: 'hugeicons:capcut-rectangle' },
+                  { name: 'OBS Studio', icon: 'simple-icons:obsstudio' },
+                ]
+              },
+              { 
+                category: "Web & Logic", 
+                skills: [
+                  { name: 'React', icon: 'material-icon-theme:react' },
+                  { name: 'Tailwind', icon: 'vscode-icons:file-type-tailwind' },
+                  { name: 'JavaScript', icon: 'skill-icons:javascript' },
+                  { name: 'Bootstrap', icon: 'skill-icons:bootstrap' },
+                  { name: 'GitHub', icon: 'skill-icons:github-dark' },
+                ]
+              }
+            ].map((group, groupIdx) => (
               <motion.div 
-                key={i} 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                transition={{ delay: i * 0.1 }}
+                key={group.category}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="bg-slate-900/40 border border-white/5 p-8 rounded-[32px] hover:border-purple-500/30 transition-all group"
+                transition={{ delay: groupIdx * 0.2 }}
+                className="flex flex-col md:flex-row md:items-center gap-6"
               >
-                <h4 className="text-purple-400 font-mono text-[10px] uppercase tracking-widest mb-6 font-bold">{cat.title}</h4>
-                <div className="flex flex-wrap gap-2 justify-center">{cat.skills.map(s => <span key={s} className="px-3 py-1.5 bg-white/5 text-slate-300 text-[10px] rounded-xl border border-white/5">{s}</span>)}</div>
+                {/* Category Label */}
+                <div className="w-48 shrink-0">
+                  <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 mb-1">
+                    {group.category}
+                  </h4>
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    whileInView={{ width: "2rem" }}
+                    transition={{ delay: 0.5 + groupIdx * 0.2, duration: 0.8 }}
+                    className="h-[2px] bg-purple-500/50" 
+                  />
+                </div>
+
+                {/* Icon Row */}
+                <div className="flex flex-wrap gap-3">
+                  {group.skills.map((skill, skillIdx) => (
+                    <motion.div
+                      key={skill.name}
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ 
+                        delay: (groupIdx * 0.2) + (skillIdx * 0.1),
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 20 
+                      }}
+                      whileHover={{ 
+                        y: -8, 
+                        transition: { duration: 0.2 } 
+                      }}
+                      className="group relative w-14 h-14 md:w-16 md:h-16 flex items-center justify-center bg-slate-900/40 border border-white/5 rounded-2xl transition-all hover:border-purple-500/50 hover:bg-slate-900/80"
+                    >
+                      {/* Subtle Inner Glow on Hover */}
+                      <div className="absolute inset-0 rounded-2xl bg-purple-500/0 group-hover:bg-purple-500/5 transition-colors duration-300" />
+                      
+                      <Icon 
+                        icon={skill.icon} 
+                        className="w-7 h-7 md:w-9 md:h-9 grayscale group-hover:grayscale-0 transition-all duration-500 z-10" 
+                      />
+                      
+                      {/* Tooltip on Hover */}
+                      <div className="absolute -top-10 scale-0 group-hover:scale-100 transition-all duration-300 ease-out bg-white text-black px-3 py-1 rounded-lg z-20 pointer-events-none shadow-xl">
+                        <span className="text-[9px] font-black uppercase whitespace-nowrap">{skill.name}</span>
+                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-white rotate-45" />
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </motion.div>
             ))}
           </div>
@@ -520,10 +830,10 @@ const Portfolio = () => {
       </section>
 
       {/* Credentials */}
-      <section className="py-24 px-10 md:px-24 bg-slate-950 border-t border-white/5 relative z-10">
+      <section id="achievements" className="py-24 px-10 md:px-24 bg-slate-950 border-t border-white/5 relative z-10">
         <div className="max-w-7xl mx-auto">
           <motion.h3 
-            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
             className="text-4xl font-black mb-16 text-white uppercase italic">Certificates and <span className="text-purple-500">Achievements</span></motion.h3>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <motion.div 
@@ -544,8 +854,8 @@ const Portfolio = () => {
                 return (
                     <motion.div 
                       key={idx}
-                      initial={{ opacity: 0, x: 30 }} 
-                      whileInView={{ opacity: 1, x: 0 }} 
+                      initial={{ opacity: 0, scale: 0.9 }} 
+                      whileInView={{ opacity: 1, scale: 1 }} 
                       transition={{ delay: idx * 0.1 }}
                       viewport={{ once: true }}
                       onClick={() => hasLink && setSelectedCert(item)} 
@@ -567,34 +877,39 @@ const Portfolio = () => {
       {/* Footer */}
       <footer id="contact" className="py-32 px-10 text-center relative z-10 border-t border-white/5 bg-slate-950">
         <motion.h2 
-            initial={{ opacity: 0, y: 20 }} 
+            initial={{ opacity: 0, y: 30 }} 
             whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true }}
             className="text-5xl font-black text-white italic uppercase mb-12"
         >
             Let's Create <span className="text-purple-500">Together.</span>
         </motion.h2>
 
         <div className="flex justify-center space-x-8 mb-12">
-            <motion.a whileHover={{ y: -5 }} href={profile.socials.github} target="_blank" className="p-4 rounded-full bg-slate-900 border border-white/5 text-white hover:text-purple-400 transition-all shadow-xl"><Github size={24}/></motion.a>
-            <motion.a whileHover={{ y: -5 }} href={profile.socials.facebook} target="_blank" className="p-4 rounded-full bg-slate-900 border border-white/5 text-white hover:text-blue-500 transition-all shadow-xl"><Facebook size={24}/></motion.a>
-            <motion.a whileHover={{ y: -5 }} href={`mailto:${profile.socials.mail}`} className="p-4 rounded-full bg-slate-900 border border-white/5 text-white hover:text-purple-400 transition-all shadow-xl"><Mail size={24}/></motion.a>
+            <motion.a whileHover={{ y: -10, color: "#a855f7" }} href={profile.socials.github} target="_blank" className="p-4 rounded-full bg-slate-900 border border-white/5 text-white transition-all shadow-xl"><Github size={24}/></motion.a>
+            <motion.a whileHover={{ y: -10, color: "#3b82f6" }} href={profile.socials.facebook} target="_blank" className="p-4 rounded-full bg-slate-900 border border-white/5 text-white transition-all shadow-xl"><Facebook size={24}/></motion.a>
+            <motion.a whileHover={{ y: -10, color: "#a855f7" }} href={gmailLink} target="_blank" className="p-4 rounded-full bg-slate-900 border border-white/5 text-white transition-all shadow-xl"><Mail size={24}/></motion.a>
         </div>
 
         <motion.a 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             whileHover={{ scale: 1.05 }} 
-            href={`mailto:${profile.socials.mail}`} 
+            whileTap={{ scale: 0.95 }}
+            href={gmailLink} target="_blank"
             className="inline-block px-12 py-5 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-black rounded-2xl uppercase tracking-widest text-sm shadow-2xl"
         >
             Send Email
         </motion.a>
       </footer>
 
-      {/* MODAL SYSTEM */}
+      {/* MODAL SYSTEM (Kept standard for performance) */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[200] bg-slate-950/98 backdrop-blur-xl flex items-center justify-center p-4 md:p-10" onClick={() => setSelectedProject(null)}>
             {selectedProject.category === "Graphics" ? (
-                <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="relative max-w-5xl w-full flex flex-col items-center" onClick={e => e.stopPropagation()}>
+                <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="relative max-w-5xl w-full flex flex-col items-center" onClick={e => e.stopPropagation()}>
                     <button onClick={() => setSelectedProject(null)} className="absolute -top-12 right-0 p-3 text-white/50 hover:text-white transition-colors"><X size={32}/></button>
                     <div className="relative group overflow-hidden rounded-[40px] shadow-2xl border border-white/5 bg-slate-900">
                         <AnimatePresence mode="wait"><motion.img key={currentImgIdx} initial={{ opacity: 0 }} animate={{ opacity: 1 }} src={selectedProject.images ? selectedProject.images[currentImgIdx] : selectedProject.previewImage} className="max-w-full max-h-[75vh] object-contain" /></AnimatePresence>
@@ -608,12 +923,18 @@ const Portfolio = () => {
                     <h4 className="mt-8 text-white text-2xl font-black uppercase italic tracking-widest">{selectedProject.title}</h4>
                 </motion.div>
             ) : (
-              <motion.div initial={{ scale: 0.95, y: 40 }} animate={{ scale: 1, y: 0 }} className="bg-slate-900 rounded-[40px] w-full max-w-7xl h-[85vh] flex flex-col md:flex-row overflow-hidden border border-white/10 shadow-2xl shadow-black/50" onClick={e => e.stopPropagation()}>
+              <motion.div initial={{ scale: 0.95, y: 40, opacity: 0 }} animate={{ scale: 1, y: 0, opacity: 1 }} className="bg-slate-900 rounded-[40px] w-full max-w-7xl h-[85vh] flex flex-col md:flex-row overflow-hidden border border-white/10 shadow-2xl shadow-black/50" onClick={e => e.stopPropagation()}>
                 <div className="w-full md:w-3/4 bg-black flex items-center justify-center relative overflow-hidden">
                   {selectedProject.videoSrc ? (
-                    <video controls autoPlay className="w-full h-full object-contain shadow-2xl"><source src={Array.isArray(selectedProject.videoSrc) ? selectedProject.videoSrc[0] : selectedProject.videoSrc} type="video/mp4" /></video>
+                    selectedProject.videoSrc.includes('drive.google.com') ? (
+                      <iframe src={selectedProject.videoSrc} className="w-full h-full border-0" allow="autoplay; fullscreen" title={selectedProject.title} />
+                    ) : (
+                      <video controls autoPlay className="w-full h-full object-contain">
+                        <source src={selectedProject.videoSrc} type="video/mp4" />
+                      </video>
+                    )
                   ) : (
-                    <iframe className="w-full h-full border-0 bg-slate-900" src={selectedProject.link?.includes("figma") ? `https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(selectedProject.link)}` : selectedProject.link} />
+                    <iframe className="w-full h-full border-0 bg-slate-900" src={selectedProject.link} />
                   )}
                 </div>
                 <div className="w-full md:w-1/4 p-10 overflow-y-auto bg-slate-900/80 backdrop-blur-md border-l border-white/5 text-left">
@@ -635,7 +956,7 @@ const Portfolio = () => {
       <AnimatePresence>
         {(isResumeOpen || selectedCert) && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[250] bg-slate-950/98 backdrop-blur-md flex items-center justify-center p-4 md:p-6" onClick={() => { setIsResumeOpen(false); setSelectedCert(null); }}>
-            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="bg-slate-900 rounded-[32px] w-full max-w-6xl h-[90vh] flex flex-col md:flex-row overflow-hidden border border-white/10 shadow-2xl" onClick={e => e.stopPropagation()}>
+            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} className="bg-slate-900 rounded-[32px] w-full max-w-6xl h-[90vh] flex flex-col md:flex-row overflow-hidden border border-white/10 shadow-2xl" onClick={e => e.stopPropagation()}>
               <div className="w-full md:w-80 p-8 flex flex-col bg-slate-900/50 border-r border-white/5 text-left">
                 <h3 className="text-2xl font-black text-white mb-4 uppercase italic">{isResumeOpen ? 'Resume' : selectedCert.title}</h3>
                 <div className="space-y-4 mt-auto">
